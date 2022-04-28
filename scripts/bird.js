@@ -1,7 +1,7 @@
 // In the name of Allah.
 const bird = document.getElementById('bird');
 const scoreDiv = document.querySelector('.score');
-const gameOverDiv = document.querySelector('.game-over');
+const gameOverDiv = document.querySelectorAll('.game-over');
 const startGameTxt = document.querySelector('#start-game');
 
 //Events:
@@ -74,6 +74,9 @@ document.onkeydown = function (e) {
         var audio = new Audio("audio/wing.ogg");
         audio.volume = 0.02;
         audio.play();
+    } else { // gameover.
+        e.preventDefault();
+        window.location.reload();
     }
 
 };
@@ -85,7 +88,8 @@ document.addEventListener('gameOver', () => {
     let audio = new Audio("audio/die.ogg");
     audio.volume = 0.02
     audio.play();
-    gameOverDiv.style.display = 'inline';
+
+    gameOverDiv.forEach((gameover) => { gameover.style.display = 'inline'; });
 });
 document.addEventListener('score', () => {
     score++;
@@ -102,7 +106,8 @@ document.addEventListener('hit', () => {
     let audio = new Audio("audio/hit.ogg");
     audio.volume = 0.02
     audio.play();
-    gameOverDiv.style.display = 'inline';
+    gameOverDiv.forEach((gameover) => { gameover.style.display = 'inline'; });
+
 });
 
 document.addEventListener('swoosh', () => {
